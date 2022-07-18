@@ -8,7 +8,7 @@
 
    copy_from_colo.py --src_dir /project/ai/emulation/user_name/FILE_TRANSFER --dest_dir /dest_path
 
-   > 例如：copy_from_colo.py --src_dir /project/ai/emulation/qidson01/lib/ --dest_dir /home/qidson01/Desktop/lib/
+   > 例如：copy_from_colo.py --src_dir /project/ai/emulation/qidson01/lib --dest_dir /home/qidson01/Desktop/
 
    --src_dir: login服务器上用于拷贝文件的中转路径
 
@@ -50,3 +50,25 @@
 7. 进入/home/mnt_nfs路径（Linux PC机的a011911目录挂载在开发板的/home/mnt_nfs/a011911下面）。进入该目录即可查看自己传输的文件
 
    ![image-20220509175227623](C:\Users\33010\AppData\Roaming\Typora\typora-user-images\image-20220509175227623.png)
+
+8. 如果在板子上生成的profiler数据，可以拷贝出来，放到szc里面使用aipu_profiler命令生成html文件，首先是从板子上拷贝至Linux服务器中
+
+   scp root@10.188.100.220:/home/a011911/qidson01/outofbox/benchmark_SONG_perfData.bin /home/qidson01/Desktop
+
+![image-20220519171904944](C:\Users\33010\AppData\Roaming\Typora\typora-user-images\image-20220519171904944.png)
+
+9. 通过copy文件将perf_data.bin拷贝至szc的emulation文件夹下
+
+   copy_to_colo.py --src_dir ./benchmark_SONG_perfData.bin --dest_dir /project/ai/emulation/qidson01
+
+   ![image-20220519172004546](C:\Users\33010\AppData\Roaming\Typora\typora-user-images\image-20220519172004546.png)
+
+10. 将perf_data.bin文件拷贝到自己的工作目录中，然后使用aipu_profiler命令生成html文件，此过程需要对应的graph.json文件
+
+    aipu_profiler graph.json benchmark_SONG_perfData.bin 
+
+    ![image-20220519172110237](C:\Users\33010\AppData\Roaming\Typora\typora-user-images\image-20220519172110237.png)
+
+11. 用firefox命令打开对应的html文件
+
+![image-20220519172145938](C:\Users\33010\AppData\Roaming\Typora\typora-user-images\image-20220519172145938.png)
