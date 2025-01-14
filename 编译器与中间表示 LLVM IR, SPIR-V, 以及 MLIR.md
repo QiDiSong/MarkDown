@@ -132,9 +132,9 @@ SPIR-V 最初发布于 2015 年。 SPIR-V 是多个 Khronos API 共用的中间�
 
 ### 标准规范的扩展性和兼容性
 
-<font color='yellow'>Khronos Group 的标语是“连接软件与硬件”</font>，简明扼要地总结了其任务。 这种连接是通过标准规范 (standard) 和编程接口。 Khronos Group 定义标准规范以及编程接口；硬件厂商提供它们的硬件实现，软件厂商则可以让软件在所有支持的平台与设备上运行。 Khronos Group 定义维护了[很多标准规范](https://en.wikipedia.org/wiki/Khronos_Group#Standards)，比较著名的有 Vulkan, OpenGL, 以及 OpenCL。
+Khronos Group 的标语是“连接软件与硬件”，简明扼要地总结了其任务。 这种连接是通过标准规范 (standard) 和编程接口。 Khronos Group 定义标准规范以及编程接口；硬件厂商提供它们的硬件实现，软件厂商则可以让软件在所有支持的平台与设备上运行。 Khronos Group 定义维护了[很多标准规范](https://en.wikipedia.org/wiki/Khronos_Group#Standards)，比较著名的有 Vulkan, OpenGL, 以及 OpenCL。
 
-<font color='yellow'>标准规范的主要目的是抽象不同的硬件实现，并提供对上层软件的统一接口。</font> 但同时，标准规范也需要能够支持硬件特有的功能。 这是对现实中存在各式各样硬件的一种承认，也让软件能够深度挖掘某些具体硬件的性能。 这两个看似相互冲突的目标通过分等级的特性 (feature) 体系 (hierarchy) 得以支持。 Khronos Group 内部有清晰的流程来管理各种特性，包括提议新的特性，提升某厂商专有的特性为通用特性等等。
+标准规范的主要目的是抽象不同的硬件实现，并提供对上层软件的统一接口。 但同时，标准规范也需要能够支持硬件特有的功能。 这是对现实中存在各式各样硬件的一种承认，也让软件能够深度挖掘某些具体硬件的性能。 这两个看似相互冲突的目标通过分等级的特性 (feature) 体系 (hierarchy) 得以支持。 Khronos Group 内部有清晰的流程来管理各种特性，包括提议新的特性，提升某厂商专有的特性为通用特性等等。
 
 SPIR-V 也是一种标准，所以具有相同的设置。除了核心特性之外，SPIR-V 支持通过[多种机制](https://www.khronos.org/registry/SPIR-V/specs/unified1/SPIRV.html#_extendability)来扩展其功能，包括添加新的枚举值, 引入新的扩展 (extension)，或者通过某个命名空间引入一整套指令 (extended instruction set)。 其扩展也分为不同等级——厂商自有扩展 (vendor specific)、多厂商联合支持的扩展 (EXT)、 以及 Khronos 级别的扩展 (KHR)。 任意厂商都可以提议新的扩展，但扩展越接近核心级别，就需要越多的厂商复议，并且要经过愈发严格的审核和批准流程。 总体上 SPIR-V 和其工作组 (working group) 分别从技术和组织上提供了框架来支持标准的演进和扩展。
 
@@ -156,23 +156,23 @@ SPIR-V 中独特的部分在于对很多 GPU 概念的原生支持。 这种支�
 
 ## MLIR
 
-<font color='yellow'>MLIR 在 2019 年底合并到了 LLVM 代码库，所以它才开源开发了两年左右</font>。 我个人感觉一个生态至少需要五年才能相对完善。从这个角度，MLIR 尚处于非常早期，许多开发尚待进行。 但 MLIR 依然给编译器开发带来了许多新颖的想法和深远的改变，比如<font color='yellow'>通过基础设施化来进一步解耦编译器的中间表示</font>。
+MLIR 在 2019 年底合并到了 LLVM 代码库，所以它才开源开发了两年左右。 我个人感觉一个生态至少需要五年才能相对完善。从这个角度，MLIR 尚处于非常早期，许多开发尚待进行。 但 MLIR 依然给编译器开发带来了许多新颖的想法和深远的改变，比如通过基础设施化来进一步解耦编译器的中间表示。
 
 ### 基础设施化
 
-基础设施化 (infrastructurization) 其实是技术演进的自然终点 (endpoint)。 成为基础设施意味着一项技术已经足够成熟并且得到广泛部署。 变成基础设施后，新的技术变革在其之上产生。电力、网络、公共云等等，都符合这个潮流。 上述都是超大规模的基础设施化。 基础设施化同样适用于影响规模小的技术，<font color='yellow'>因为它能够通过共用来降低开发成本</font>， 并让每个人只关注其核心商业逻辑的实现。
+基础设施化 (infrastructurization) 其实是技术演进的自然终点 (endpoint)。 成为基础设施意味着一项技术已经足够成熟并且得到广泛部署。 变成基础设施后，新的技术变革在其之上产生。电力、网络、公共云等等，都符合这个潮流。 上述都是超大规模的基础设施化。 基础设施化同样适用于影响规模小的技术，因为它能够通过共用来降低开发成本， 并让每个人只关注其核心商业逻辑的实现。
 
-很多人通过机器学习编译器了解到 MLIR。 这确实是 MLIR 最初关注的领域，但 MLIR 其实有着更加广泛的应用范围。 <font color='yellow'>MLIR 是用来开发编译器基础设施。它提供一系列可复用的易扩展的基础组件，用来搭建领域专用编译器</font>。 在 LLVM IR 和 SPIR-V 中，我们有唯一的中间表示，其中含有完备的指令集来编译所有的 CPU 和 GPU 程序。<font color='yellow'>MLIR 中则没有完全处于中心地位的中间表示</font>。 MLIR 提供基础设施来帮助定义 [operation](https://mlir.llvm.org/docs/LangRef/#operations) 以及将逻辑相关的 operation 组合成 [dialect](https://mlir.llvm.org/docs/LangRef/#dialects)。 另外，<font color='red'>MLIR 也提供一些普适的 pattern 或者 pass，这些 pattern 或者 pass 并不与具体的 operation 绑定</font>，能够自适应。
+很多人通过机器学习编译器了解到 MLIR。 这确实是 MLIR 最初关注的领域，但 MLIR 其实有着更加广泛的应用范围。 MLIR 是用来开发编译器基础设施。它提供一系列可复用的易扩展的基础组件，用来搭建领域专用编译器。 在 LLVM IR 和 SPIR-V 中，我们有唯一的中间表示，其中含有完备的指令集来编译所有的 CPU 和 GPU 程序。MLIR 中则没有完全处于中心地位的中间表示。 MLIR 提供基础设施来帮助定义 [operation](https://mlir.llvm.org/docs/LangRef/#operations) 以及将逻辑相关的 operation 组合成 [dialect](https://mlir.llvm.org/docs/LangRef/#dialects)。 另外，MLIR 也提供一些普适的 pattern 或者 pass，这些 pattern 或者 pass 并不与具体的 operation 绑定，能够自适应。
 
-无论是对 operation 还是 pattern/pass 的支持都要求 MLIR 以更加细的粒度看待编译器。<font color='yellow'> 在 MLIR 中，operation 不再是最基础的部件，粒度进一步细化</font>到[类型](https://mlir.llvm.org/docs/LangRef/#type-system), 值, [attribute](https://mlir.llvm.org/docs/LangRef/#attributes), [region](https://mlir.llvm.org/docs/LangRef/#regions), 以及 [interface](https://mlir.llvm.org/docs/Interfaces/) (例如 attribute/type/operation interface).
+无论是对 operation 还是 pattern/pass 的支持都要求 MLIR 以更加细的粒度看待编译器。 在 MLIR 中，operation 不再是最基础的部件，粒度进一步细化到[类型](https://mlir.llvm.org/docs/LangRef/#type-system), 值, [attribute](https://mlir.llvm.org/docs/LangRef/#attributes), [region](https://mlir.llvm.org/docs/LangRef/#regions), 以及 [interface](https://mlir.llvm.org/docs/Interfaces/) (例如 attribute/type/operation interface).
 
-<font color='red'>Operation 可以有任意数量的输入、输出、attribute，并包含任意数量的 region。 其中 region 能够表示 operation 之间的嵌套关系，从而简化编译器的分析和转换。 Operation 可以实现 operation interface，pattern 和 pass 绑定的是 operation interface，由此而实现与具体 operation 的解绑并做到自适应。</font>
+Operation 可以有任意数量的输入、输出、attribute，并包含任意数量的 region。 其中 region 能够表示 operation 之间的嵌套关系，从而简化编译器的分析和转换。 Operation 可以实现 operation interface，pattern 和 pass 绑定的是 operation interface，由此而实现与具体 operation 的解绑并做到自适应。
 
 MLIR 里面的概念都设计的比较抽象，目的是能比较好地映射到不同的领域和场景。
 
 ### Dialects, dialects, dialects
 
-当然，这套基础设施存在的目的是帮助搭建最终编译器。 我们在写 C++ 程序的的时候会调用 STL 或者更加高层次的库，很少会从头开始实现所有的细节。 另外，基础设施也需要与其支持的领域协同发展，因为使用场景中会 提供很多需求。 因此，MLIR 代码库中自带很多用来给各种层级概念建模的 dialect。
+当然，这套基础设施存在的目的是帮助搭建最终编译器。 我们在写 C++ 程序的的时候会调用 STL 或者更加高层次的库，很少会从头开始实现所有的细节。 另外，基础设施也需要与其支持的领域协同发展，因为使用场景中会提供很多需求。 因此，MLIR 代码库中自带很多用来给各种层级概念建模的 dialect。
 
 MLIR 的 dialect 生态目前还在扩张演进阶段，但 dialect 之间的组织结构以及有些 dialect 已经相对稳定了。 比如我们有 [LLVM](https://mlir.llvm.org/docs/Dialects/LLVM/) 和 [SPIR-V](https://mlir.llvm.org/docs/Dialects/SPIR-V/) dialect 作为与其他系统转换的边界 dialect。 （其实只 MLIR 可以同时表示 LLVM IR 和 SPIR-V 这一点也表明了 MLIR 的基础设施角色。） 抽象层次居中的有 [Linalg](https://mlir.llvm.org/docs/Dialects/Linalg/), [Tensor](https://mlir.llvm.org/docs/Dialects/TensorOps/), [Vector](https://mlir.llvm.org/docs/Dialects/Vector/), [SCF](https://mlir.llvm.org/docs/Dialects/SCF/) dialect，它们协同合作用来生成代码。 另外，MLIR 中还有 [Affine](https://mlir.llvm.org/docs/Dialects/Affine/), [Math](https://mlir.llvm.org/docs/Dialects/Math/), [Arithmetic](https://mlir.llvm.org/docs/Dialects/Arith/) dialect 用来描述底层计算。 在 AI 框架层面，有 [TensorFlow](https://github.com/tensorflow/tensorflow/tree/7e7a73b9de37b658b59d12be993271849cc02916/tensorflow/compiler/mlir/tensorflow), [TFLite](https://github.com/tensorflow/tensorflow/tree/7e7a73b9de37b658b59d12be993271849cc02916/tensorflow/compiler/mlir/lite), [MHLO](https://github.com/tensorflow/mlir-hlo/tree/39917d58fb2cfb3c721f8ad8d913a41fb4a489f3/include/mlir-hlo/Dialect/mhlo), [Torch](https://github.com/llvm/torch-mlir/tree/9afaacedbdff9487749b7d043c56f1bce6e98766/include/torch-mlir/Dialect/Torch), [TOSA](https://mlir.llvm.org/docs/Dialects/TOSA/) 进行对接和导入模型。 除此之外，还有很多其他用途的 dialect，像是 [PDL](https://mlir.llvm.org/docs/Dialects/PDLOps/) 用来定义编译器转换等等。
 
@@ -180,15 +180,15 @@ Alex 之前在 MLIR 论坛上[分享](https://llvm.discourse.group/t/codegen-dia
 
 ### 进一步解耦编译器和中间表示
 
-其实基础设施化以及由此产生的大量 dialect 都是进一步解耦和模块化编译器以及中间表示的一种自然结果。 <font color='yellow'>唯一的中间表示被许多以 dialect 形态存在的部分的中间表示取代</font>。<font color='red'> 没有某个部分中间表示再处于中心地位，都是按需组合</font>。 <font color='red'>如果现有的 dialect 不能满足需求，定义新的 dialect</font> [非常简单](https://mlir.llvm.org/docs/OpDefinitions/)。 再过几年待 MLIR 更加完善后，可以预见，开发领域专用编译器只需要新加自己的边界 dialect 来定义项目相关的 operation，之后就是选取和组合现有 dialect 来形成整体的流程。 如果这个构想实现，那肯定会极大的缩减开发所需工程投入。
+其实基础设施化以及由此产生的大量 dialect 都是进一步解耦和模块化编译器以及中间表示的一种自然结果。 唯一的中间表示被许多以 dialect 形态存在的部分的中间表示取代。 没有某个部分中间表示再处于中心地位，都是按需组合。 如果现有的 dialect 不能满足需求，定义新的 dialect [非常简单](https://mlir.llvm.org/docs/OpDefinitions/)。 再过几年待 MLIR 更加完善后，可以预见，开发领域专用编译器只需要新加自己的边界 dialect 来定义项目相关的 operation，之后就是选取和组合现有 dialect 来形成整体的流程。 如果这个构想实现，那肯定会极大的缩减开发所需工程投入。
 
-另外，进一步解耦中间表示也让我们可以灵活地根据领域进行设计和折中。 我们只需选取所需的部分中间表示来组合成完整编译器，<font color='yellow'>不再需要全盘接收像 LLVM IR 一样的一套完整中间表示</font>。 <font color='yellow'>因为 interface 的存在，扩展模块的更能也变得更加简单——我们既可以定义新的 operation 来实现已有的 interface，也可以定义新的 interface 然后</font>[支持现有 operation](https://mlir.llvm.org/docs/Interfaces/#external-models-for-attribute-operation-and-type-interfaces)。
+另外，进一步解耦中间表示也让我们可以灵活地根据领域进行设计和折中。 我们只需选取所需的部分中间表示来组合成完整编译器，不再需要全盘接收像 LLVM IR 一样的一套完整中间表示。 因为 interface 的存在，扩展模块的更能也变得更加简单——我们既可以定义新的 operation 来实现已有的 interface，也可以定义新的 interface 然后[支持现有 operation](https://mlir.llvm.org/docs/Interfaces/#external-models-for-attribute-operation-and-type-interfaces)。
 
-换言之，<font color='red'>LLVM IR 天然中心化并且偏好统一的编译流程，MLIR 的基础设施和 dialect 生态则天然是去中心化并且偏好离散的编译流程</font>。
+换言之，LLVM IR 天然中心化并且偏好统一的编译流程，MLIR 的基础设施和 dialect 生态则天然是去中心化并且偏好离散的编译流程。
 
 技术的一般发展趋势是从单一的强耦合整体到适用不同场景的多种多样的选择。 对于技术栈的上层而言，这尤其明显，因为越往上越接近用户和商业需求，而用户和商业需求本身就各式各样，由层出不穷的前端框架可见一斑。
 
-技术栈的底层一般相对稳定。少数几种硬件架构、编译器和操作系统统治很多年。 但半导体进展的变慢和计算需求的爆炸式增长也在驱动着底层技术的变革。 现在依然依靠通用架构和普适优化很难再满足各种需求，开发领域专用的整体的解决方案是一条出路。<font color='grey'> RISC-V 在芯片指令集层次探索模块化和定制化，MLIR 则是在编译器以及中间表示层面做类似探索</font>。 两者联手会给底层技术栈带来何种革新是一个值得拭目以待的事情。
+技术栈的底层一般相对稳定。少数几种硬件架构、编译器和操作系统统治很多年。 但半导体进展的变慢和计算需求的爆炸式增长也在驱动着底层技术的变革。 现在依然依靠通用架构和普适优化很难再满足各种需求，开发领域专用的整体的解决方案是一条出路。 RISC-V 在芯片指令集层次探索模块化和定制化，MLIR 则是在编译器以及中间表示层面做类似探索。 两者联手会给底层技术栈带来何种革新是一个值得拭目以待的事情。
 
 ### 跨系统边界的渐进式代码表示递降
 
@@ -208,4 +208,4 @@ LLVM 通过其 LLVM IR 和库解耦并模块化了编译器。LLVM 同时用文�
 
 SPIR-V 是着眼于 GPU 领域的行业标准规范。SPIR-V 有技术上的机制和组织上的流程来维持其可扩展性。 SPIR-V 有着稳定的字节码和兼容性保障。
 
-<font color='yellow'>MLIR 进一步解耦了中间表示；完整的中间表示被分割成可以按需选取的 dialect。 其基础设施极大地简化定义各种层级 operation 和转换</font>。 这符合技术发展的趋势——技术一般都是从单一的强耦合的解决方案渐渐演进到多种多样的可定制化的解决方案。 将来开发领域专用编译器可能真的只是选取、定制、以及混合各种 dialect 这般简单。
+MLIR 进一步解耦了中间表示；完整的中间表示被分割成可以按需选取的 dialect。 其基础设施极大地简化定义各种层级 operation 和转换。 这符合技术发展的趋势——技术一般都是从单一的强耦合的解决方案渐渐演进到多种多样的可定制化的解决方案。 将来开发领域专用编译器可能真的只是选取、定制、以及混合各种 dialect 这般简单。
