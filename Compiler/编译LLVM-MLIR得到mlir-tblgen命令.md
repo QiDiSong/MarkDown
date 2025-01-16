@@ -39,6 +39,8 @@ cmake -G Ninja ../llvm \
 
 -DBUILD_SHARED_LIBS=ON   用于生成共享库
 
+-DLLVM_ENABLE_RTTI=ON   用于开启RTTI模块
+
 #### **参数说明**：
 
 - `-DLLVM_ENABLE_PROJECTS="mlir"`：表示只构建 MLIR。
