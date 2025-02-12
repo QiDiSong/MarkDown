@@ -1,3 +1,5 @@
+
+
 `mlir-tblgen` 是 MLIR 的一个工具，默认是 LLVM 项目的一部分，因此你需要通过构建 LLVM/MLIR 来安装它。以下是安装和构建 `mlir-tblgen` 的详细步骤：
 
 ------
@@ -33,13 +35,16 @@ cmake -G Ninja ../llvm \
   -DLLVM_TARGETS_TO_BUILD="X86" \
   -DCMAKE_BUILD_TYPE=Release \
   -DLLVM_ENABLE_ASSERTIONS=ON \
-  -DLLVM_ENABLE_RTTI=ON  \
-  -DBUILD_SHARED_LIBS=ON
+  -DLLVM_ENABLE_RTTI=ON \
+  -DBUILD_SHARED_LIBS=ON \
+  -DMLIR_ENABLE_BINDINGS_PYTHON=ON
 ```
 
 -DBUILD_SHARED_LIBS=ON   用于生成共享库
 
 -DLLVM_ENABLE_RTTI=ON   用于开启RTTI模块
+
+-DMLIR_ENABLE_BINDINGS_PYTHON=ON 用于开启python bind可以用python
 
 #### **参数说明**：
 
