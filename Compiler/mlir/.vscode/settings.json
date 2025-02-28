@@ -2,6 +2,7 @@
     "files.associations": {
         "memory": "cpp",
         "cctype": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     }
 }
