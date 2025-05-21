@@ -28,6 +28,21 @@ cd build
 
 <font color='red'>注意：cmake有缓存，如果上次使用GCC7.3，而这是你改变了GCC版本为9.3，如果不删掉build文件夹重新编译的话，默认还是使用上次GCC7.3的缓存</font>
 
+静态链接，生成.a
+
+```
+cmake -G Ninja ../llvm \
+  -DLLVM_ENABLE_PROJECTS="mlir" \
+  -DLLVM_BUILD_EXAMPLES=ON \
+  -DLLVM_TARGETS_TO_BUILD="X86" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLLVM_ENABLE_ASSERTIONS=ON \
+  -DLLVM_ENABLE_RTTI=ON \
+-DMLIR_ENABLE_BINDINGS_PYTHON=ON
+```
+
+动态链接，开启SHARED_LIB
+
 ```
 cmake -G Ninja ../llvm \
   -DLLVM_ENABLE_PROJECTS="mlir" \
